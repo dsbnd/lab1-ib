@@ -28,11 +28,11 @@ jobs:
         run: mvn -B compile spotbugs:spotbugs spotbugs:check
 
       - name: Run SCA with OWASP Dependency-Check
-        run: mvn -B org.owasp:dependency-check-maven:13.0.0:check -DfailBuildOnCVSS=7
+        run: mvn -B dependency-check:check
 
       - name: Upload security reports
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: security-reports
           path: |
@@ -40,4 +40,3 @@ jobs:
             target/dependency-check-report.html
             target/dependency-check-report.json
           if-no-files-found: warn
-

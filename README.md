@@ -50,8 +50,7 @@ curl -s -X POST http://127.0.0.1:8080/api/notes \
 ```bash
 mvn test
 mvn compile spotbugs:spotbugs spotbugs:check
-mvn org.owasp:dependency-check-maven:13.0.0:check -DfailBuildOnCVSS=7
+mvn dependency-check:check
 ```
 
 GitHub Actions запускает тесты, SpotBugs (SAST) и OWASP Dependency-Check (SCA) при каждом push и pull request. Отчёты сохраняются в артефакте `security-reports`.
-
