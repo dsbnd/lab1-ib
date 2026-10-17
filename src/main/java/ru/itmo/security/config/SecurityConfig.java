@@ -34,16 +34,20 @@ import ru.itmo.security.user.UserRepository;
 public class SecurityConfig {
 
     @Bean
-    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http
-                .csrf(csrf -> csrf.disable())
-                .sessionManagement(session ->
-                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/login").permitAll()
-                        .anyRequest().authenticated())
-                .oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt -> {}))
-                .build();
+    SecurityFilterChain securityFilterChain(HttpSecurity http) {
+        try {
+            return http
+                    .csrf(csrf -> csrf.disable())
+                    .sessionManagement(session ->
+                            session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                    .authorizeHttpRequests(auth -> auth
+                            .requestMatchers("/auth/login").permitAll()
+                            .anyRequest().authenticated())
+                    .oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt -> {}))
+                    .build();
+        } catch (Exception exception) {
+            throw new IllegalStateException("Could not build the security filter chain", exception);
+        }
     }
 
     @Bean
@@ -93,4 +97,3 @@ public class SecurityConfig {
         return decoder;
     }
 }
-
