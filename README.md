@@ -50,7 +50,6 @@ curl -s -X POST http://127.0.0.1:8080/api/notes \
 ```bash
 mvn test
 mvn compile spotbugs:spotbugs spotbugs:check
-mvn dependency-check:check
 ```
 
-GitHub Actions запускает тесты, SpotBugs (SAST) и OWASP Dependency-Check (SCA) при каждом push и pull request. Отчёты сохраняются в артефакте `security-reports`.
+GitHub Actions запускает тесты, SpotBugs (SAST) и Trivy (SCA) при каждом push и pull request. Trivy не требует ключ NVD и завершает сборку с ошибкой при обнаружении исправимых уязвимостей уровней High или Critical. Отчёты сохраняются в артефакте `security-reports`.
