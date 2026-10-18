@@ -53,3 +53,21 @@ mvn compile spotbugs:spotbugs spotbugs:check
 ```
 
 GitHub Actions запускает тесты, SpotBugs (SAST) и Trivy (SCA) при каждом push и pull request. Trivy не требует ключ NVD и завершает сборку с ошибкой при обнаружении исправимых уязвимостей уровней High или Critical. Отчёты сохраняются в артефакте `security-reports`.
+
+## Результаты CI/CD
+
+- [Последний успешный запуск Security CI](https://github.com/dsbnd/lab1-ib/actions/runs/39031949244/job/117394023490)
+- SpotBugs: ошибок и предупреждений не обнаружено.
+- Trivy: SCA-проверка зависимостей завершена успешно.
+
+### Успешный pipeline
+
+![Успешный запуск GitHub Actions](docs/images/ci-success.png)
+
+### Отчёт SpotBugs
+
+![SpotBugs — ошибок и предупреждений не обнаружено](docs/images/spotbugs-success.png)
+
+### Проверка Trivy
+
+![Успешное выполнение Trivy SCA](docs/images/trivy-success.png)
