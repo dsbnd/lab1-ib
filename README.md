@@ -56,7 +56,7 @@ GitHub Actions запускает тесты, SpotBugs (SAST) и Trivy (SCA) п�
 
 ## Результаты CI/CD
 
-- [Последний успешный запуск Security CI](https://github.com/dsbnd/lab1-ib/actions/runs/39031949244/job/117394023490)
+- [Успешный запуск Security CI](https://github.com/dsbnd/lab1-ib/actions/runs/39031949244/job/117394023490)
 - SpotBugs: ошибок и предупреждений не обнаружено.
 - Trivy: SCA-проверка зависимостей завершена успешно.
 
@@ -71,3 +71,29 @@ GitHub Actions запускает тесты, SpotBugs (SAST) и Trivy (SCA) п�
 ### Проверка Trivy
 
 ![Успешное выполнение Trivy SCA](docs/images/trivy-success.png)
+
+## Ручное тестирование API
+
+### Запрет доступа без JWT
+
+Запрос к защищённому маршруту без токена возвращает `401 Unauthorized`.
+
+![Отказ в доступе без JWT](docs/images/api-unauthorized.png)
+
+### Аутентификация и выдача JWT
+
+Корректные учётные данные возвращают `200 OK` и Bearer-токен со сроком действия 1800 секунд.
+
+![Успешная аутентификация и выдача JWT](docs/images/api-login.png)
+
+### Доступ с JWT
+
+После передачи JWT защищённый маршрут `/api/data` возвращает `200 OK` и данные пользователя.
+
+![Успешный доступ к API с JWT](docs/images/api-authorized-data.png)
+
+### Экранирование пользовательских данных
+
+При создании заметки HTML-теги экранируются: `<script>` преобразуется в `&lt;script&gt;`.
+
+![Проверка защиты от XSS](docs/images/api-xss-protection.png)
